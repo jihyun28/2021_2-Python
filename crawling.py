@@ -1,16 +1,15 @@
 # -*- coding: euc-kr -*-
 
-# html ¹®¼­ Á¤º¸¸¦ °¡Á®¿À±â À§ÇØ »ç¿ëÇÏ´Â ¶óÀÌºê·¯¸®
+# html ë¬¸ì„œ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬
 import urllib.request
-import requests
 from bs4 import BeautifulSoup
 
-# ºÒ·¯¿Ã url ÁÖ¼Ò 
+# ë¶ˆëŸ¬ì˜¬ url ì£¼ì†Œ 
 web = urllib.request.urlopen('http://www.swu.ac.kr/www/swuniversity.html')
 soup = BeautifulSoup(web, 'html.parser')
 
-print("*** ¼­¿ï¿©ÀÚ´ëÇĞ±³ ÇĞ°ú ¹× È¨ÆäÀÌÁö Á¤º¸ ***")
-print("ÇĞ°ú\t\t\t\t\tÈ¨ÆäÀÌÁö")
+print("*** ì„œìš¸ì—¬ìëŒ€í•™êµ í•™ê³¼ ë° í™ˆí˜ì´ì§€ ì •ë³´ ***")
+print("í•™ê³¼\t\t\t\t\tí™ˆí˜ì´ì§€")
 
 dept = soup.find_all("li")
 
@@ -21,10 +20,12 @@ for d in dept:
     soup = BeautifulSoup(web, "html.parser")
     dep = d.a.text
 
-    if ("ÇĞ°ú" in dep) or ("Àü°ø" in dep):
+    if ("í•™ê³¼" in dep) or ("ì „ê³µ" in dep) or ("í•™ë¶€" in dep):
         if(soup.find('a', {"class":"btn btn_xl btn_blue_gray"})):
             page = soup.find("a", {'class':'btn btn_xl btn_blue_gray'})['href']
             print(f"{d.text}\t\t\t{page}")
+        else:
+            print("í™ˆí˜ì´ì§€ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ")
 
     else:
-        print("È¨ÆäÀÌÁö°¡ Á¸ÀçÇÏÁö ¾ÊÀ½")
+        print("í™ˆí˜ì´ì§€ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ")
